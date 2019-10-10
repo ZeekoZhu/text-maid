@@ -23,6 +23,12 @@
     "@nestjs/common": "^6.7.2",
     "@nestjs/core": "^6.7.2",
     "@nestjs/platform-express": "^6.7.2",
+    "asciidoctor-highlight.js": "^0.2.0",
+    "asciidoctor.js": "^1.5.9",
+    "cheerio": "^1.0.0-rc.3",
+    "highlight.js": "^9.15.10",
+    "lodash-es": "^4.17.15",
+    "markdown-it": "^10.0.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.0",
     "rxjs": "^6.5.3"
