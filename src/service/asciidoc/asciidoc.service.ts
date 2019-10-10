@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import AsciiDoctor from 'asciidoctor.js';
 import highlightJsExt from 'asciidoctor-highlight.js';
+import { TextTransformer } from "../text-transformer";
 
 const asciiDoctor = new AsciiDoctor();
 const registry = asciiDoctor.Extensions.create();
@@ -24,7 +25,11 @@ const convertOptions = {
     },
     'extension_registry': registry,
 };
-@Injectable()
-export class AsciiDocService {
 
+@Injectable()
+export class AsciiDocService implements TextTransformer {
+    render(src: string) {
+        const html = asciiDoctor.convert(src, convertOptions);
+        return { source: src, html };
+    }
 }
