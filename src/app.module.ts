@@ -1,11 +1,14 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
+import { TextController } from './text.controller';
 import { AppService } from './app.service';
-import { HtmlProcessorService } from './html-processor/html-processor.service';
+import { HtmlProcessorService } from './service/html-processor/html-processor.service';
+import { MarkdownService } from './service/markdown/markdown.service';
+import { AsciiDocService } from './service/asciidoc/asciidoc.service';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService, HtmlProcessorService],
+    imports: [],
+    controllers: [TextController],
+    providers: [AppService, HtmlProcessorService, MarkdownService, AsciiDocService],
 })
-export class AppModule {}
+export class AppModule {
+}
