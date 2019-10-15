@@ -4,9 +4,10 @@ import { AsciiDocService } from './service/asciidoc/asciidoc.service';
 import { TextTransformer } from './service/text-transformer';
 import { Response } from 'express';
 import { errorMsg } from './model/error-msg';
+import { HtmlProcessorService } from "./service/html-processor/html-processor.service";
 
 export enum TextType {
-    Markdown, AsciiDoc
+    Markdown = 'md', AsciiDoc = 'adoc'
 }
 
 export class RenderRequest {
@@ -16,7 +17,10 @@ export class RenderRequest {
 
 @Controller('text')
 export class TextController {
-    constructor(private mdRenderer: MarkdownService, private asciiDocRenderer: AsciiDocService) {
+    constructor(
+        private mdRenderer: MarkdownService,
+        private asciiDocRenderer: AsciiDocService,
+        private htmlProcessor: HtmlProcessorService) {
     }
 
     @Post('render')
@@ -34,6 +38,7 @@ export class TextController {
                 break;
         }
         const doc = renderer.render(renderReq.text);
-        res.status(200).send(doc);
+        const rendered = this.htmlProcessor.process(doc);
+        res.status(200).send(rendered);
     }
 }
