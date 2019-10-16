@@ -1,13 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import AsciiDoctor from 'asciidoctor.js';
 import highlightJsExt from 'asciidoctor-highlight.js';
-import { TextTransformer } from "../text-transformer";
+import katexExt from 'asciidoctor-katex';
+
+import { defaultRenderOpt, TextTransformer } from '../text-transformer';
+import { katexOptions } from '../katex-options';
 
 const asciiDoctor = new AsciiDoctor();
-const registry = asciiDoctor.Extensions.create();
-highlightJsExt.register(registry);
 
-const convertOptions = {
+const convertOptions = (registry) => ({
     safe: 'safe',
     attributes: {
         icons: 'font',
@@ -21,15 +22,22 @@ const convertOptions = {
         'note-caption': '💬',
         'tip-caption': '💡',
         'warning-caption': '🚨',
-        'source-highlighter': 'highlightjs-ext'
+        'source-highlighter': 'highlightjs-ext',
     },
     'extension_registry': registry,
-};
+});
 
 @Injectable()
 export class AsciiDocService implements TextTransformer {
-    render(src: string) {
-        const html = asciiDoctor.convert(src, convertOptions);
+    render(src: string, opt = defaultRenderOpt) {
+        const registry = asciiDoctor.Extensions.create();
+        if (opt.codeHighlight) {
+            highlightJsExt.register(registry);
+        }
+        if (opt.math) {
+            katexExt.register(registry, { katexOptions });
+        }
+        const html = asciiDoctor.convert(src, convertOptions(registry));
         return { source: src, html };
     }
 }
