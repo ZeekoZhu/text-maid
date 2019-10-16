@@ -1,10 +1,10 @@
 import { Body, Controller, Post, Res } from '@nestjs/common';
-import { MarkdownService } from './service/markdown/markdown.service';
-import { AsciiDocService } from './service/asciidoc/asciidoc.service';
-import { TextTransformer } from './service/text-transformer';
+import { MarkdownService } from '../service/markdown/markdown.service';
+import { AsciiDocService } from '../service/asciidoc/asciidoc.service';
+import { TextTransformer } from '../service/text-transformer';
 import { Response } from 'express';
-import { errorMsg } from './model/error-msg';
-import { HtmlProcessorService } from "./service/html-processor/html-processor.service";
+import { errorMsg } from '../model/error-msg';
+import { HtmlProcessorService } from "../service/html-processor/html-processor.service";
 
 export enum TextType {
     Markdown = 'md', AsciiDoc = 'adoc'
@@ -15,7 +15,7 @@ export class RenderRequest {
     type: TextType;
 }
 
-@Controller('text')
+@Controller('api/text')
 export class TextController {
     constructor(
         private mdRenderer: MarkdownService,

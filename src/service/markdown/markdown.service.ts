@@ -34,8 +34,8 @@ const mdOpt: MarkdownIt.Options = {
 };
 
 const anchorOpt: MdAnchor.AnchorOptions = {
-    slugify: uslug,
-    level: 6
+    level: 1,
+    slugify: str => uslug(str),
 };
 
 const md = new MarkdownIt(mdOpt)

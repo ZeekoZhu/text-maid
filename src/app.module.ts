@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { TextController } from './text.controller';
+import { TextController } from './contorller/text.controller';
 import { AppService } from './app.service';
 import { HtmlProcessorService } from './service/html-processor/html-processor.service';
 import { MarkdownService } from './service/markdown/markdown.service';
