@@ -14,6 +14,7 @@ import MdSup from 'markdown-it-sup';
 import MdAnchor from 'markdown-it-anchor';
 import MdKatex from '@iktakahiro/markdown-it-katex';
 import uslug from 'uslug';
+import MdToc from 'markdown-it-table-of-contents';
 import { katexOptions } from '../katex-options';
 
 const mdUtils = new MarkdownIt().utils;
@@ -21,6 +22,14 @@ const mdUtils = new MarkdownIt().utils;
 const anchorOpt: MdAnchor.AnchorOptions = {
     level: 1,
     slugify: str => uslug(str),
+};
+
+const tocOptions = {
+    includeLevel: [1, 2, 3, 4, 5, 6],
+    containerClass: 'toc',
+    markerPattern: /\[TOC]/im,
+    containerHeaderHtml: '<div class="toc-container-header">目录</div>',
+    slugify: anchorOpt.slugify
 };
 
 const codeHighlight = (str, lang) => {
@@ -50,6 +59,7 @@ const mdFactory = (opt: RenderOption) => {
     const md = new MarkdownIt(mdOpt)
         .use(MarkdownItContainer)
         .use(MdAnchor, anchorOpt)
+        .use(MdToc, tocOptions)
         .use(MdAbbr)
         .use(MdDefList)
         .use(MdEmoji)

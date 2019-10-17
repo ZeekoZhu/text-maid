@@ -4,7 +4,7 @@ import { AsciiDocService } from '../service/asciidoc/asciidoc.service';
 import { TextTransformer } from '../service/text-transformer';
 import { Response } from 'express';
 import { errorMsg } from '../model/error-msg';
-import { HtmlProcessorService } from "../service/html-processor/html-processor.service";
+import { HtmlProcessorService } from '../service/html-processor/html-processor.service';
 
 export enum TextType {
     Markdown = 'md', AsciiDoc = 'adoc'
@@ -13,6 +13,7 @@ export enum TextType {
 export class RenderRequest {
     text: string;
     type: TextType;
+    extraDocData: boolean;
 }
 
 @Controller('api/text')
@@ -38,7 +39,10 @@ export class TextController {
                 break;
         }
         const doc = renderer.render(renderReq.text);
-        const rendered = this.htmlProcessor.process(doc);
-        res.status(200).send(rendered);
+        if (renderReq.extraDocData) {
+            const processed = this.htmlProcessor.process(doc);
+            res.status(200).send(processed);
+        }
+        res.status(200).send({ doc, toc: [], languages: [] });
     }
 }

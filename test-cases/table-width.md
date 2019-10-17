@@ -1,0 +1,6 @@
+## Pattern关键字
+
+
+| [Conversion Word](https://logback.qos.ch/manual/layouts.html#conversionWord) | Effect |
+| ---------------------------------------- | ---------------------------------------- |
+| **c**{*length*} **lo**{*length*} **logger**{*length*} | Outputs the name of the logger at the origin of the logging event.This conversion word takes an integer as its first and only option. The converter's abbreviation algorithm will shorten the logger name, usually without significant loss of meaning. Setting the value of length option to zero constitutes an exception. It will cause the conversion word to return the sub-string right to the rightmost dot character in the logger name. The next table provides examples of the abbreviation algorithm in action.Conversion specifierLogger nameResult%loggermainPackage.sub.sample.BarmainPackage.sub.sample.Bar%logger{0}mainPackage.sub.sample.BarBar%logger{5}mainPackage.sub.sample.Barm.s.s.Bar%logger{10}mainPackage.sub.sample.Barm.s.s.Bar%logger{15}mainPackage.sub.sample.Barm.s.sample.Bar%logger{16}mainPackage.sub.sample.Barm.sub.sample.Bar%logger{26}mainPackage.sub.sample.BarmainPackage.sub.sample.BarPlease note that the rightmost segment in a logger name is never abbreviated, even if its length is longer than the *length* option. Other segments may be shortened to at most a single character but are never removed. | "

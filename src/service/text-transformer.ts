@@ -7,7 +7,7 @@ export interface RenderOption {
 
 export const defaultRenderOpt: RenderOption = {
     codeHighlight: false,
-    math: false,
+    math: true,
 };
 
 export interface TextTransformer {

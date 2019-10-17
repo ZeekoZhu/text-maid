@@ -1,0 +1,126 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MarkdownService should not width attr on table 1`] = `
+Object {
+  "html": "<h2 id=\\"pattern关键字\\">Pattern关键字</h2>
+<table>
+<thead>
+<tr>
+<th><a href=\\"https://logback.qos.ch/manual/layouts.html#conversionWord\\">Conversion Word</a></th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>c</strong>{<em>length</em>} <strong>lo</strong>{<em>length</em>} <strong>logger</strong>{<em>length</em>}</td>
+<td>Outputs the name of the logger at the origin of the logging event.This conversion word takes an integer as its first and only option. The converter's abbreviation algorithm will shorten the logger name, usually without significant loss of meaning. Setting the value of length option to zero constitutes an exception. It will cause the conversion word to return the sub-string right to the rightmost dot character in the logger name. The next table provides examples of the abbreviation algorithm in action.Conversion specifierLogger nameResult%loggermainPackage.sub.sample.BarmainPackage.sub.sample.Bar%logger{0}mainPackage.sub.sample.BarBar%logger{5}mainPackage.sub.sample.Barm.s.s.Bar%logger{10}mainPackage.sub.sample.Barm.s.s.Bar%logger{15}mainPackage.sub.sample.Barm.s.sample.Bar%logger{16}mainPackage.sub.sample.Barm.sub.sample.Bar%logger{26}mainPackage.sub.sample.BarmainPackage.sub.sample.BarPlease note that the rightmost segment in a logger name is never abbreviated, even if its length is longer than the <em>length</em> option. Other segments may be shortened to at most a single character but are never removed.</td>
+</tr>
+</tbody>
+</table>
+",
+  "source": "## Pattern关键字
+
+
+| [Conversion Word](https://logback.qos.ch/manual/layouts.html#conversionWord) | Effect |
+| ---------------------------------------- | ---------------------------------------- |
+| **c**{*length*} **lo**{*length*} **logger**{*length*} | Outputs the name of the logger at the origin of the logging event.This conversion word takes an integer as its first and only option. The converter's abbreviation algorithm will shorten the logger name, usually without significant loss of meaning. Setting the value of length option to zero constitutes an exception. It will cause the conversion word to return the sub-string right to the rightmost dot character in the logger name. The next table provides examples of the abbreviation algorithm in action.Conversion specifierLogger nameResult%loggermainPackage.sub.sample.BarmainPackage.sub.sample.Bar%logger{0}mainPackage.sub.sample.BarBar%logger{5}mainPackage.sub.sample.Barm.s.s.Bar%logger{10}mainPackage.sub.sample.Barm.s.s.Bar%logger{15}mainPackage.sub.sample.Barm.s.sample.Bar%logger{16}mainPackage.sub.sample.Barm.sub.sample.Bar%logger{26}mainPackage.sub.sample.BarmainPackage.sub.sample.BarPlease note that the rightmost segment in a logger name is never abbreviated, even if its length is longer than the *length* option. Other segments may be shortened to at most a single character but are never removed. | \\"
+",
+}
+`;
+
+exports[`MarkdownService should render [toc] 1`] = `
+Object {
+  "html": "<h1 id=\\"heading-1\\">heading 1</h1>
+<p><div class=\\"toc\\"><div class=\\"toc-container-header\\">目录</div><ul><li><a href=\\"#heading-1\\">heading 1</a><ul><li><a href=\\"#前言\\">前言</a><ul><li><a href=\\"#我能吞下玻璃而不伤喉咙\\">我能吞下玻璃而不伤喉咙</a></li></ul></li><li><a href=\\"#heading-2\\">heading 2</a></li><li><a href=\\"#heading-3\\">heading 3</a></li></ul></li></ul></div></p>
+<h2 id=\\"前言\\">前言</h2>
+<h3 id=\\"我能吞下玻璃而不伤喉咙\\">我能吞下玻璃而不伤喉咙</h3>
+<h2 id=\\"heading-2\\">heading 2</h2>
+<h2 id=\\"heading-3\\">heading 3</h2>
+",
+  "source": "# heading 1
+
+[toc]
+
+## 前言
+
+### 我能吞下玻璃而不伤喉咙
+
+## heading 2
+
+## heading 3
+",
+}
+`;
+
+exports[`MarkdownService should render code with "<" 1`] = `
+Object {
+  "html": "<p>i(i&lt;j)</p>
+<pre><code class=\\"language-js\\">function binarySearch1(a, target) {
+    while (start &lt;= end)
+    {
+        var mid = ~~((start + end) &gt;&gt; 1);
+    }
+}
+</code></pre>
+",
+  "source": "i(i<j)
+\`\`\`js
+function binarySearch1(a, target) {
+    while (start <= end)
+    {
+        var mid = ~~((start + end) >> 1);
+    }
+}
+\`\`\`
+",
+}
+`;
+
+exports[`MarkdownService should render encoded html 1`] = `
+Object {
+  "html": "<pre><code class=\\"language-html\\">&lt;br/&gt;
+</code></pre>
+",
+  "source": "\`\`\`html
+<br/>
+\`\`\`
+",
+}
+`;
+
+exports[`MarkdownService should render hard line break 1`] = `
+Object {
+  "html": "<p>hello<br>
+world</p>
+",
+  "source": "hello
+world",
+}
+`;
+
+exports[`MarkdownService should render link 1`] = `
+Object {
+  "html": "<p><a href=\\"http://github.com\\">github.com</a></p>
+",
+  "source": "github.com",
+}
+`;
+
+exports[`MarkdownService should render math 1`] = `
+Object {
+  "html": "<p>$$<br>
+test<br>
+$$</p>
+<p>$test$</p>
+<p>$test2$</p>
+",
+  "source": "$$
+test
+$$
+
+$test$
+
+\\\\$test2\\\\$
+",
+}
+`;
