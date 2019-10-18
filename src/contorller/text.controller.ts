@@ -1,7 +1,7 @@
 import { Body, Controller, Post, Res } from '@nestjs/common';
 import { MarkdownService } from '../service/markdown/markdown.service';
 import { AsciiDocService } from '../service/asciidoc/asciidoc.service';
-import { TextTransformer } from '../service/text-transformer';
+import { defaultRenderOpt, RenderOption, TextTransformer } from '../service/text-transformer';
 import { Response } from 'express';
 import { errorMsg } from '../model/error-msg';
 import { HtmlProcessorService } from '../service/html-processor/html-processor.service';
@@ -14,6 +14,7 @@ export class RenderRequest {
     text: string;
     type: TextType;
     extraDocData: boolean;
+    renderOption: RenderOption
 }
 
 @Controller('api/text')
@@ -38,7 +39,7 @@ export class TextController {
                 res.status(400).send(errorMsg([`Unsupported text type: ${renderReq.type}`]));
                 break;
         }
-        const doc = renderer.render(renderReq.text);
+        const doc = renderer.render(renderReq.text, { ...defaultRenderOpt, ...renderReq.renderOption });
         if (renderReq.extraDocData) {
             const processed = this.htmlProcessor.process(doc);
             res.status(200).send(processed);
