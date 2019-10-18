@@ -6,7 +6,7 @@ export interface RenderOption {
 }
 
 export const defaultRenderOpt: RenderOption = {
-    codeHighlight: false,
+    codeHighlight: true,
     math: true,
 };
 

@@ -55,10 +55,10 @@ Object {
 exports[`MarkdownService should render code with "<" 1`] = `
 Object {
   "html": "<p>i(i&lt;j)</p>
-<pre><code class=\\"language-js\\">function binarySearch1(a, target) {
-    while (start &lt;= end)
+<pre class=\\"hljs\\"><code data-lang=\\"js\\"><span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">binarySearch1</span>(<span class=\\"hljs-params\\">a, target</span>) </span>{
+    <span class=\\"hljs-keyword\\">while</span> (start &lt;= end)
     {
-        var mid = ~~((start + end) &gt;&gt; 1);
+        <span class=\\"hljs-keyword\\">var</span> mid = ~~((start + end) &gt;&gt; <span class=\\"hljs-number\\">1</span>);
     }
 }
 </code></pre>
@@ -78,7 +78,7 @@ function binarySearch1(a, target) {
 
 exports[`MarkdownService should render encoded html 1`] = `
 Object {
-  "html": "<pre><code class=\\"language-html\\">&lt;br/&gt;
+  "html": "<pre class=\\"hljs\\"><code data-lang=\\"html\\"><span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">br</span>/&gt;</span>
 </code></pre>
 ",
   "source": "\`\`\`html
@@ -106,15 +106,33 @@ Object {
 }
 `;
 
-exports[`MarkdownService should render math 1`] = `
+exports[`MarkdownService should render math to html 1`] = `
 Object {
-  "html": "<p>$$<br>
-test<br>
-$$</p>
-<p>$test$</p>
+  "html": "<p class='katex-block'><span class=\\"katex-display\\"><span class=\\"katex\\"><span class=\\"katex-mathml\\"><math><semantics><mrow><mi>t</mi><mi>e</mi><mi>s</mi><mi>t</mi></mrow><annotation encoding=\\"application/x-tex\\">test
+</annotation></semantics></math></span><span class=\\"katex-html\\" aria-hidden=\\"true\\"><span class=\\"base\\"><span class=\\"strut\\" style=\\"height:0.61508em;vertical-align:0em;\\"></span><span class=\\"mord mathdefault\\">t</span><span class=\\"mord mathdefault\\">e</span><span class=\\"mord mathdefault\\">s</span><span class=\\"mord mathdefault\\">t</span></span></span></span></span></p>
+<p><span class=\\"katex\\"><span class=\\"katex-mathml\\"><math><semantics><mrow><mi>t</mi><mi>e</mi><mi>s</mi><mi>t</mi></mrow><annotation encoding=\\"application/x-tex\\">test</annotation></semantics></math></span><span class=\\"katex-html\\" aria-hidden=\\"true\\"><span class=\\"base\\"><span class=\\"strut\\" style=\\"height:0.61508em;vertical-align:0em;\\"></span><span class=\\"mord mathdefault\\">t</span><span class=\\"mord mathdefault\\">e</span><span class=\\"mord mathdefault\\">s</span><span class=\\"mord mathdefault\\">t</span></span></span></span></p>
 <p>$test2$</p>
 ",
-  "source": "$$
+  "source": "
+$$
+test
+$$
+
+$test$
+
+\\\\$test2\\\\$
+",
+}
+`;
+
+exports[`MarkdownService should render simple math 1`] = `
+Object {
+  "html": "<p><div class=\\"math display\\">\\\\[test
+\\\\]</div></p><p>$test$</p>
+<p>$test2$</p>
+",
+  "source": "
+$$
 test
 $$
 

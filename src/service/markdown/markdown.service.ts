@@ -16,6 +16,7 @@ import MdKatex from '@iktakahiro/markdown-it-katex';
 import uslug from 'uslug';
 import MdToc from 'markdown-it-table-of-contents';
 import { katexOptions } from '../katex-options';
+import { simpleMathPlugin } from './plugins/simple-math.plugin';
 
 const mdUtils = new MarkdownIt().utils;
 
@@ -29,7 +30,7 @@ const tocOptions = {
     containerClass: 'toc',
     markerPattern: /\[TOC]/im,
     containerHeaderHtml: '<div class="toc-container-header">目录</div>',
-    slugify: anchorOpt.slugify
+    slugify: anchorOpt.slugify,
 };
 
 const codeHighlight = (str, lang) => {
@@ -70,6 +71,8 @@ const mdFactory = (opt: RenderOption) => {
 
     if (opt.math) {
         md.use(MdKatex, katexOptions);
+    } else {
+        md.use(simpleMathPlugin);
     }
     return md;
 };

@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { MarkdownService } from './markdown.service';
 import fs from 'fs';
+import { defaultRenderOpt } from '../text-transformer';
 
 const readFile = (path: string) => {
     return fs.readFileSync(path, { encoding: 'utf8', flag: 'r' });
@@ -53,7 +54,11 @@ describe('MarkdownService', () => {
         expect(output).toMatchSnapshot();
     });
 
-    it('should render math', () => {
+    it('should render simple math', () => {
+        expect(service.render(readTestCase('math'), { ...defaultRenderOpt, math: false })).toMatchSnapshot();
+    });
+
+    it('should render math to html', () => {
         expect(service.render(readTestCase('math'))).toMatchSnapshot();
     });
 });
