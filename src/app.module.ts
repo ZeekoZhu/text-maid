@@ -6,9 +6,15 @@ import { MarkdownService } from './service/markdown/markdown.service';
 import { AsciiDocService } from './service/asciidoc/asciidoc.service';
 import { MathController } from './contorller/math.controller';
 import { CodeController } from './contorller/code.controller';
+import { TerminusModule } from '@nestjs/terminus';
+import { TerminusOptionsService } from './service/terminus-options.service';
 
 @Module({
-    imports: [],
+    imports: [
+        TerminusModule.forRootAsync({
+            useClass: TerminusOptionsService,
+        }),
+    ],
     controllers: [TextController, MathController, CodeController],
     providers: [AppService, HtmlProcessorService, MarkdownService, AsciiDocService],
 })
