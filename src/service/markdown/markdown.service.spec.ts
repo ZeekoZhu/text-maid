@@ -61,4 +61,18 @@ describe('MarkdownService', () => {
     it('should render math to html', () => {
         expect(service.render(readTestCase('math'))).toMatchSnapshot();
     });
+
+    it('should render mermaid', () => {
+        expect(service.render(readTestCase('mermaid'))).toMatchSnapshot();
+    });
+
+    it('should not convert email', () => {
+        const email = 'foo@example.com';
+        expect(service.render(email).html).toBe(`<p>${email}</p>\n`);
+    });
+
+    it('should render auto link', () => {
+        const link = 'https://example.com';
+        expect(service.render(link).html).toBe(`<p><a href="${link}">${link}</a></p>\n`)
+    });
 });

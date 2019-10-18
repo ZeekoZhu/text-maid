@@ -125,6 +125,25 @@ $test$
 }
 `;
 
+exports[`MarkdownService should render mermaid 1`] = `
+Object {
+  "html": "<div class=\\"mermaid\\">sequenceDiagram
+loop every day
+    Alice-&gt;&gt;John: Hello John, how are you?
+    John--&gt;&gt;Alice: Great!
+end
+</div>",
+  "source": "\`\`\`mermaid
+sequenceDiagram
+loop every day
+    Alice->>John: Hello John, how are you?
+    John-->>Alice: Great!
+end
+\`\`\`
+",
+}
+`;
+
 exports[`MarkdownService should render simple math 1`] = `
 Object {
   "html": "<p><div class=\\"math display\\">\\\\[test

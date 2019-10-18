@@ -17,6 +17,7 @@ import uslug from 'uslug';
 import MdToc from 'markdown-it-table-of-contents';
 import { katexOptions } from '../katex-options';
 import { simpleMathPlugin } from './plugins/simple-math.plugin';
+import { diagramPlugin } from './plugins/simple-mermaid.plugin';
 
 const mdUtils = new MarkdownIt().utils;
 
@@ -59,6 +60,7 @@ const mdFactory = (opt: RenderOption) => {
 
     const md = new MarkdownIt(mdOpt)
         .use(MarkdownItContainer)
+        .use(diagramPlugin)
         .use(MdAnchor, anchorOpt)
         .use(MdToc, tocOptions)
         .use(MdAbbr)
@@ -74,6 +76,8 @@ const mdFactory = (opt: RenderOption) => {
     } else {
         md.use(simpleMathPlugin);
     }
+
+    md.linkify.set({ fuzzyEmail: false });
     return md;
 };
 
