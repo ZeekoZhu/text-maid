@@ -1,5 +1,6 @@
 FROM node:alpine
 RUN npm install pm2 -g
+RUN apk --update --no-cache add curl
 
 COPY "." "/app"
 WORKDIR "/app"
