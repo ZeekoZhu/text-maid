@@ -5,7 +5,6 @@ on: [push]
 jobs:
   build:
     name:  Build and test
-    if: github.ref != 'master'
 
     runs-on: ubuntu-latest
 
@@ -24,24 +23,10 @@ jobs:
         yarn
         yarn build
         yarn test
-
-  publish:
-    name: Publish to docker hub
-    if: github.ref == 'master'
-    needs: [build]
-    runs-on: ubuntu-18.04
-    steps:
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      - name: Restore, build and test
-        run: |
-          yarn
-          yarn build
-      - uses: elgohr/Publish-Docker-Github-Action@2.7
-        name: Publish docker image
-        with:
-          name: zeekozhu/text-maid
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+    - uses: elgohr/Publish-Docker-Github-Action@2.7
+      name: Publish docker image
+      with:
+        name: zeekozhu/text-maid
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+      if: github.ref == 'refs/heads/master'
