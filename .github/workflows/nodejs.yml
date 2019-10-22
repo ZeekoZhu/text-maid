@@ -24,13 +24,6 @@ jobs:
         yarn
         yarn build
         yarn test
-      env:
-        CI: true
-    - name: Archive production artifacts
-      uses: actions/upload-artifact@v1
-      with:
-        name: dist
-        path: ./
 
   publish:
     name: Publish to docker hub
@@ -38,10 +31,14 @@ jobs:
     needs: [build]
     runs-on: ubuntu-18.04
     steps:
-      - name: Download artifacts
-        uses: actions/download-artifact@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
         with:
-          name: dist
+          node-version: ${{ matrix.node-version }}
+      - name: Restore, build and test
+        run: |
+          yarn
+          yarn build
       - uses: elgohr/Publish-Docker-Github-Action@2.7
         name: Publish docker image
         with:
