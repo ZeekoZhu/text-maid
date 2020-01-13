@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import AsciiDoctor from 'asciidoctor.js';
+import AsciiDoctor from 'asciidoctor';
 import highlightJsExt from 'asciidoctor-highlight.js';
 import katexExt from 'asciidoctor-katex';
 

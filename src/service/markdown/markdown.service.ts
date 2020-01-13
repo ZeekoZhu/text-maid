@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { defaultRenderOpt, TextTransformer } from '../text-transformer';
 import { TextDoc } from '../../model/text-doc';
-import { markdownItFactory, defaultOption } from "@zeeko/markdown-it-presets";
+import { markdownItFactory, defaultOption } from "@zeeko-myget/markdown-it-presets";
 
 @Injectable()
 export class MarkdownService implements TextTransformer {
