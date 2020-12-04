@@ -33,7 +33,7 @@
     "asciidoctor-highlight.js": "^0.2.0",
     "asciidoctor-katex": "^0.3.0",
     "cheerio": "^1.0.0-rc.3",
-    "highlight.js": "^9.15.10",
+    "highlight.js": "^10.4.1",
     "katex": "^0.11.1",
     "lodash": "^4.17.15",
     "markdown-it": "^10.0.0",
