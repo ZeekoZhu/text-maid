@@ -54,16 +54,8 @@ describe('MarkdownService', () => {
         expect(output).toMatchSnapshot();
     });
 
-    it('should render simple math', () => {
-        expect(service.render(readTestCase('math'), { ...defaultRenderOpt, math: false })).toMatchSnapshot();
-    });
-
     it('should render math to html', () => {
         expect(service.render(readTestCase('math'))).toMatchSnapshot();
-    });
-
-    it('should render mermaid', () => {
-        expect(service.render(readTestCase('mermaid'))).toMatchSnapshot();
     });
 
     it('should not convert email', () => {

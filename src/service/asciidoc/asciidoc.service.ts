@@ -6,7 +6,7 @@ import katexExt from 'asciidoctor-katex';
 import { defaultRenderOpt, TextTransformer } from '../text-transformer';
 import { katexOptions } from '../katex-options';
 
-const asciiDoctor = new AsciiDoctor();
+const asciiDoctor = AsciiDoctor();
 
 const convertOptions = (registry) => ({
     safe: 'safe',
@@ -37,7 +37,7 @@ export class AsciiDocService implements TextTransformer {
         if (opt.math) {
             katexExt.register(registry, { katexOptions });
         }
-        const html = asciiDoctor.convert(src, convertOptions(registry));
+        const html = asciiDoctor.convert(src, convertOptions(registry)) as string;
         return { source: src, html };
     }
 }

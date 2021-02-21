@@ -14,7 +14,7 @@ export class RenderRequest {
     text: string;
     type: TextType;
     extraDocData: boolean;
-    renderOption: RenderOption
+    renderOption: RenderOption;
 }
 
 @Controller('api/text')
@@ -26,7 +26,7 @@ export class TextController {
     }
 
     @Post('render')
-    markdown(@Body() renderReq: RenderRequest, @Res() res: Response) {
+    render(@Body() renderReq: RenderRequest, @Res() res: Response) {
         let renderer: TextTransformer;
         switch (renderReq.type) {
             case TextType.Markdown:
@@ -36,13 +36,14 @@ export class TextController {
                 renderer = this.asciiDocRenderer;
                 break;
             default:
-                res.status(400).send(errorMsg([`Unsupported text type: ${renderReq.type}`]));
-                break;
+                res.status(400).send(errorMsg([ `Unsupported text type: ${renderReq.type}` ]));
+                return;
         }
         const doc = renderer.render(renderReq.text, { ...defaultRenderOpt, ...renderReq.renderOption });
         if (renderReq.extraDocData) {
             const processed = this.htmlProcessor.process(doc);
             res.status(200).send(processed);
+            return;
         }
         res.status(200).send({ doc, toc: [], languages: [] });
     }
