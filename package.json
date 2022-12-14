@@ -25,7 +25,7 @@
     "@iktakahiro/markdown-it-katex": "^4.0.1",
     "@nestjs/common": "^7.6.12",
     "@nestjs/core": "^7.6.12",
-    "@nestjs/platform-express": "^7.6.12",
+    "@nestjs/platform-express": "^9.2.1",
     "@nestjs/terminus": "^7.1.0",
     "@types/express": "^4.17.11",
     "asciidoctor": "^2.2.1",
